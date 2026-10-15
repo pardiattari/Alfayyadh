@@ -65,7 +65,7 @@ define('BASE_URL', rtrim(getenv('BASE_URL') ?: '/', '/') . '/');
 
 // Database constants
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_NAME', getenv('DB_NAME') ?: 'alfayyadh_db');
+define('DB_NAME', getenv('DB_NAME') ?: 'u856020628_alfayyadh_db');
 define('DB_USER', getenv('DB_USER') ?: 'alfayyadh');
 define('DB_PASS', getenv('DB_PASS') ?: '');
 define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4');
