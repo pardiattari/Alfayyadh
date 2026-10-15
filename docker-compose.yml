@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alfayyadh-web
+    ports:
+      - "${WEB_PORT:-8027}:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=${DB_NAME:-alfayyadh_db}
+      - DB_USER=${DB_USER:-alfayyadh}
+      - DB_PASS=${DB_PASS:-alfayyadh123}
+      - BASE_URL=${BASE_URL:-/}
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: alfayyadh-db
+    ports:
+      - "${MYSQL_PORT:-8023}:3306"
+    environment:
+      - MYSQL_DATABASE=${DB_NAME:-alfayyadh_db}
+      - MYSQL_USER=${DB_USER:-alfayyadh}
+      - MYSQL_PASSWORD=${DB_PASS:-alfayyadh123}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root123}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/alfayyadh_db.sql:/docker-entrypoint-initdb.d/alfayyadh_db.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root123}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: alfayyadh-phpmyadmin
+    ports:
+      - "${PHPMYADMIN_PORT:-8028}:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root123}
+    depends_on:
+      - db
+    restart: unless-stopped
+
+volumes:
+  db_data:
