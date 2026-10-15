@@ -1,0 +1,12 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+# Environment variables (set di Railway dashboard)
+# DB_HOST, DB_NAME, DB_USER, DB_PASS, BASE_URL, SESSION_SECRET

@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: alfayyadh-web
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: alfayyadh-db
+          property: host
+      - key: DB_NAME
+        fromDatabase:
+          name: alfayyadh-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: alfayyadh-db
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: alfayyadh-db
+          property: password
+      - key: BASE_URL
+        value: https://alfayyadh.id
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: APP_NAME
+        value: Alfayyadh.ID
+
+databases:
+  - name: alfayyadh-db
+    databaseName: alfayyadh_db
+    user: alfayyadh
+    plan: free
+    region: singapore

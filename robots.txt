@@ -1,0 +1,18 @@
+# robots.txt for Alfayyadh.ID
+User-agent: *
+Allow: /
+
+# Disallow admin area
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /config/
+Disallow: /database/
+Disallow: /assets/uploads/
+Disallow: /redirect.php
+Disallow: /compare.php
+
+# Sitemap
+Sitemap: https://alfayyadh.id/sitemap.xml
+
+# Crawl-delay (optional, be nice to server)
+Crawl-delay: 10
