@@ -1,10 +1,3 @@
-CREATE DATABASE IF NOT EXISTS alfayyadh_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE alfayyadh_db;
-
-CREATE USER IF NOT EXISTS 'alfayyadh'@'%' IDENTIFIED WITH mysql_native_password BY 'alfayyadh123';
-GRANT ALL PRIVILEGES ON alfayyadh_db.* TO 'alfayyadh'@'%';
-FLUSH PRIVILEGES;
-
 DROP TABLE IF EXISTS clicks;
 DROP TABLE IF EXISTS product_offers;
 DROP TABLE IF EXISTS products;
